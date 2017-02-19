@@ -1,0 +1,16 @@
+{
+	"name": "jviz-loading",
+	"description": "Jviz loading webcomponent",
+	"ignore": [ "**/.*", "node_modules", "bower_components" ],
+	"dependencies":
+  {
+    "polymer": "Polymer/polymer#^1.4.0"
+  },
+  "devDependencies":
+  {
+    "jviz": "https://github.com/jviz/jviz.git#dev"
+  },
+	"license": "MIT",
+	"authors": [ "Josemi Juanes <josemijuanes@gmail.com>" ],
+	"keywords": [ "jviz", "webcomponents", "jviz-components", "loading" ]
+}
