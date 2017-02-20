@@ -60,4 +60,18 @@ jviz.components.loading.update_width = function(new_value, old_value)
   this.updateStyles();
 };
 
+//Set the loading width
+jviz.components.loading.set_width = function(value)
+{
+  //Set the component width
+  this.loadingWidth = value.toString().replace('px', '').replace('%', '') + 'px';
+};
+
+//Get the width size
+jviz.components.loading.get_width = function()
+{
+  //Return the width size
+  return parseInt(this.loadingWidth.replace('px', '').replace('%', ''));
+};
+
 </script>
