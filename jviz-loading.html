@@ -110,49 +110,28 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
 <script>
 
 //Loading component
-jviz.components.loading = { is: 'jviz-loading' };
+var jviz_loading = { is: 'jviz-loading' };
 
 //Properties
-jviz.components.loading.properties = {};
-jviz.components.loading.properties.loadingColor = { type: String, value: 'blue', reflectToAttribute: true, observer: 'update_color' };
-jviz.components.loading.properties.loadingWidth = { type: String, value: '8px', reflectToAttribute: true, observer: 'update_width' };
-
-//Ready event
-jviz.components.loading.ready = function()
-{
-  //Set the actual color
-  this.set_color(this.loadingColor);
-};
-
-//Set the color
-jviz.components.loading.set_color = function(value)
-{
-  //Update the color value
-  this.loadingColor = value;
-};
-
-//Get the actual color
-jviz.components.loading.get_color = function()
-{
-  //Return the actual color
-  return this.loadingColor;
-};
+jviz_loading.properties = {};
+jviz_loading.properties.color = { type: String, value: 'blue', reflectToAttribute: true, observer: '_update_color' };
+jviz_loading.properties.width = { type: String, value: '8px', reflectToAttribute: true, observer: '_update_width' };
 
 //Update the loading color
-jviz.components.loading.update_color = function(new_value, old_value)
+jviz_loading._update_color = function(value)
 {
   //Update the color
-  this.customStyle['--loading-color'] = 'var(--jviz-' + new_value + ')';
+  this.customStyle['--loading-color'] = 'var(--jviz-' + value + ')';
 
   //Update the styles
   this.updateStyles();
 };
 
 //Update the loading width
-jviz.components.loading.update_width = function(new_value, old_value)
+jviz_loading._update_width = function(value)
 {
   //Get the real value
-  var value = parseInt(new_value.replace('px', '').replace('%', ''));
+  value = parseInt(value.replace('px', '').replace('%', ''));
 
   //Add the width value
   this.customStyle['--loading-width'] = value + 'px';
@@ -164,21 +143,7 @@ jviz.components.loading.update_width = function(new_value, old_value)
   this.updateStyles();
 };
 
-//Set the loading width
-jviz.components.loading.set_width = function(value)
-{
-  //Set the component width
-  this.loadingWidth = value.toString().replace('px', '').replace('%', '') + 'px';
-};
-
-//Get the width size
-jviz.components.loading.get_width = function()
-{
-  //Return the width size
-  return parseInt(this.loadingWidth.replace('px', '').replace('%', ''));
-};
+//Register the loading element
+Polymer(jviz_loading);
 
 </script>
-
-<!-- Initialize the element -->
-<script> Polymer(jviz.components.loading); </script>
