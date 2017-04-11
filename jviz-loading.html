@@ -36,9 +36,9 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
         {
           /* Dots */
           border-radius: 100px;
-          width: var(--loading-width);
-          height: var(--loading-width);
-          background-color: var(--loading-color);
+          width: var(--jviz-loading-width);
+          height: var(--jviz-loading-width);
+          background-color: var(--jviz-loading-color);
 
           /* Animation */
           animation: loading_anim 1.2s infinite ease-in-out;
@@ -85,7 +85,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
         animation-delay: -0.4s;
 
         /* Position */
-        left: calc(var(--loading-space) * -1);
+        left: calc(var(--jviz-loading-space) * -1);
         position: absolute;
         top: 0;
       }
@@ -98,7 +98,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
 
         /* Position */
         position: absolute;
-        left: var(--loading-space);
+        left: var(--jviz-loading-space);
         top: 0;
       }
 
@@ -116,12 +116,16 @@ var jviz_loading = { is: 'jviz-loading' };
 jviz_loading.properties = {};
 jviz_loading.properties.color = { type: String, value: 'blue', reflectToAttribute: true, observer: '_update_color' };
 jviz_loading.properties.width = { type: String, value: '8px', reflectToAttribute: true, observer: '_update_width' };
+jviz_loading.properties.reflect = { type: Boolean, value: false, reflectToAttribute: true, observer: '_update_color' };
 
 //Update the loading color
-jviz_loading._update_color = function(value)
+jviz_loading._update_color = function()
 {
+  //Get the color variable
+  var color_variable = (this.reflect === true) ? 'var(--jviz-' + this.color + '-over)' : 'var(--jviz-' + this.color + ')';
+
   //Update the color
-  this.customStyle['--loading-color'] = 'var(--jviz-' + value + ')';
+  this.customStyle['--jviz-loading-color'] = color_variable;
 
   //Update the styles
   this.updateStyles();
@@ -134,10 +138,10 @@ jviz_loading._update_width = function(value)
   value = parseInt(value.replace('px', '').replace('%', ''));
 
   //Add the width value
-  this.customStyle['--loading-width'] = value + 'px';
+  this.customStyle['--jviz-loading-width'] = value + 'px';
 
   //Update the dots space
-  this.customStyle['--loading-space'] = (value + 5) + 'px';
+  this.customStyle['--jviz-loading-space'] = (value + 5) + 'px';
 
   //Update the styles
   this.updateStyles();
